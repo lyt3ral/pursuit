@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, serial, integer, text, timestamp, pgEnum } from 'drizzle-orm/pg-core';
 
 export const user = pgTable('user', {
 	id: text('id').primaryKey(),
@@ -14,23 +14,33 @@ export const session = pgTable('session', {
 	expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull()
 });
 
-export const jobTypeEnum = pgEnum('job_type', ['REMOTE', 'ONSITE', 'HYBRID']);
+export const modelEnum = pgEnum('work_model', ['REMOTE', 'ONSITE', 'HYBRID']);
+
+export const typeEnum = pgEnum('job_type', [
+	'FULLTIME',
+	'PARTTIME',
+	'CONTRACT',
+	'INTERNSHIP',
+	'FREELANCE'
+]);
 
 export const applicationStatusEnum = pgEnum('application_status', [
 	'APPLIED',
-	'INTERVIEW',
+	'INTERVIEWING',
 	'OFFER',
-	'REJECTED'
+	'REJECTED',
+	'GHOSTED'
 ]);
 
 export const application = pgTable('job_application', {
-	id: text('id').primaryKey(),
+	id: serial('id').primaryKey(),
 	userId: text('user_id')
 		.notNull()
 		.references(() => user.id),
 	role: text('role').notNull(),
 	company: text('company').notNull(),
-	type: jobTypeEnum('type').notNull(),
+	model: modelEnum('work_model').notNull(),
+	type: typeEnum('type').notNull(),
 	location: text('location'),
 	appliedAt: timestamp('applied_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow(),
 	notes: text('notes'),

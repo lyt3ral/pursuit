@@ -1,5 +1,5 @@
 {
-	"name": "application-tracker",
+	"name": "pursuit",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -41,6 +41,7 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
+		"@lucide/svelte": "^0.534.0",
 		"@neondatabase/serverless": "^0.10.4",
 		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",

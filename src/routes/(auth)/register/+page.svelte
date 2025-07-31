@@ -5,45 +5,47 @@
 	export let form: ActionData;
 </script>
 
-<div class="flex items-center justify-center min-h-screen bg-gray-50">
-	<div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-		<h1 class="text-2xl font-bold text-center text-gray-900">Create an Account</h1>
+<div class="flex items-center justify-center min-h-screen bg-red-300 p-4">
+	<div class="w-full max-w-md p-8 space-y-6 bg-white border rounded-lg shadow-lg">
+		<h1 class="text-3xl font-bold font-serif text-center text-gray-900">Create Account</h1>
+
 		<form method="POST" action="?/register" use:enhance class="space-y-6">
 			<div>
-				<label for="username" class="block mb-2 text-sm font-medium text-gray-700">Username</label>
+				<label for="username" class="block mb-2 font-medium text-gray-700">Username</label>
 				<input
 					id="username"
 					name="username"
 					type="text"
 					required
-					class="w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+					class="w-full p-2 bg-gray-50 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
 				/>
 			</div>
 			<div>
-				<label for="password" class="block mb-2 text-sm font-medium text-gray-700">Password</label>
+				<label for="password" class="block mb-2 font-medium text-gray-700">Password</label>
 				<input
 					id="password"
 					name="password"
 					type="password"
 					required
-					class="w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+					class="w-full p-2 bg-gray-50 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
 				/>
 			</div>
 
 			{#if form?.message}
-				<p class="text-sm text-red-500">{form.message}</p>
+				<p class="text-sm text-red-600 text-center">{form.message}</p>
 			{/if}
 
 			<button
 				type="submit"
-				class="w-full px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+				class="w-full font-medium bg-blue-200 px-4 py-2 border rounded transition hover:bg-blue-300 cursor-pointer"
 			>
-				Register
+				Create Account
 			</button>
 		</form>
-		<p class="text-sm text-center text-gray-500">
+
+		<p class="text-sm text-center">
 			Already have an account?
-			<a href="/login" class="font-medium text-blue-600 hover:underline">Sign in</a>
+			<a href="/login" class="font-medium hover:underline">Sign in</a>
 		</p>
 	</div>
 </div>
