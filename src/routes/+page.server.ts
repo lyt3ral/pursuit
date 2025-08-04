@@ -6,20 +6,24 @@ import { eq } from 'drizzle-orm';
 import { application } from '$lib/server/db/schema';
 
 export const load: PageServerLoad = async (event) => {
-	// If the user is not logged in, redirect them to the login page
+	const start = performance.now();
+
 	if (!event.locals.user) {
 		throw redirect(302, '/login');
 	}
 
-	// fetch applications
+	const queryStart = performance.now();
 	const applications = await db.query.application.findMany({
 		where: eq(application.userId, event.locals.user.id)
 	});
+	const queryEnd = performance.now();
 
-	// Make user data available to the page
+	console.log(`DB query took ${queryEnd - queryStart} ms`);
+	console.log(`Total load function took ${performance.now() - start} ms`);
+
 	return {
 		user: event.locals.user,
-		applications: applications
+		applications
 	};
 };
 

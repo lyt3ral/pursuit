@@ -4,10 +4,17 @@ import type { Actions, PageServerLoad } from './$types';
 import { redirect, fail } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
+	const start = performance.now();
+	const queryStart = performance.now();
+
 	if (!event.locals.user) {
 		throw redirect(302, '/login');
 	}
-	// You can return an empty object or any other data needed for the page
+
+	const queryEnd = performance.now();
+
+	console.log(`DB query took ${queryEnd - queryStart} ms`);
+	console.log(`Total load function took ${performance.now() - start} ms`);
 	return {};
 };
 
