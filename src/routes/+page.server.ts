@@ -5,26 +5,22 @@ import { db } from '$lib/server/db';
 import { eq } from 'drizzle-orm';
 import { application } from '$lib/server/db/schema';
 
-export const load: PageServerLoad = async (event) => {
+export const load: PageServerLoad = async ({ parent }) => {
 	const start = performance.now();
 
-	if (!event.locals.user) {
-		throw redirect(302, '/login');
-	}
+	const { user } = await parent();
+	if (!user) throw redirect(302, '/login');
 
 	const queryStart = performance.now();
 	const applications = await db.query.application.findMany({
-		where: eq(application.userId, event.locals.user.id)
+		where: eq(application.userId, user.id)
 	});
 	const queryEnd = performance.now();
 
 	console.log(`DB query took ${queryEnd - queryStart} ms`);
 	console.log(`Total load function took ${performance.now() - start} ms`);
 
-	return {
-		user: event.locals.user,
-		applications
-	};
+	return { user, applications };
 };
 
 export const actions: Actions = {

@@ -1,29 +1,29 @@
 import { db } from '$lib/server/db';
-import { application, typeEnum, applicationStatusEnum, modelEnum } from '$lib/server/db/schema';
+import { application } from '$lib/server/db/schema';
 import type { Actions, PageServerLoad } from './$types';
 import { redirect, fail } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async (event) => {
+export const load: PageServerLoad = async ({ parent }) => {
 	const start = performance.now();
+
+	// Get user from layout (non-null for protected routes)
+	const { user } = await parent();
+	if (!user) throw redirect(302, '/login');
+
 	const queryStart = performance.now();
-
-	if (!event.locals.user) {
-		throw redirect(302, '/login');
-	}
-
 	const queryEnd = performance.now();
 
 	console.log(`DB query took ${queryEnd - queryStart} ms`);
 	console.log(`Total load function took ${performance.now() - start} ms`);
+
 	return {};
 };
 
 export const actions = {
 	createApplication: async (event) => {
-		// Ensure user is still authenticated
-		if (!event.locals.user) {
-			return fail(401, { message: 'Unauthorized' });
-		}
+		// In actions, use locals instead of parent()
+		const user = event.locals.user;
+		if (!user) return fail(401, { message: 'Unauthorized' });
 
 		const formData = await event.request.formData();
 		const role = formData.get('role') as string;
@@ -53,7 +53,7 @@ export const actions = {
 
 		try {
 			await db.insert(application).values({
-				userId: event.locals.user.id,
+				userId: user.id,
 				role,
 				company,
 				type,
@@ -68,7 +68,6 @@ export const actions = {
 			return fail(500, { message: 'Could not create the application.' });
 		}
 
-		// Redirect to the main page upon success
 		throw redirect(303, '/');
 	}
 } satisfies Actions;
