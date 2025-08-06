@@ -5,105 +5,84 @@
 	export let data: PageData;
 </script>
 
-<div class="p-8 bg-red-300 min-h-screen">
+<div class="space-y-8">
 	<div class="flex justify-between items-center">
-		<h1 class="text-2xl font-serif">your applications</h1>
+		<h2 class="text-3xl font-bold text-heading">Your Applications</h2>
 		<a
-			href="/"
-			class="font-medium bg-yellow-200 px-4 py-2 border rounded transition hover:bg-yellow-300 cursor-pointer"
+			href="/applications/new"
+			class="font-semibold border text-heading px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-opacity-80"
 		>
-			Back
+			Add Application
 		</a>
 	</div>
 
-	<div class="mx-auto mt-12 rounded-lg">
-		<div class="flex justify-between items-center mb-4">
-			<form method="GET" class="flex items-center gap-2">
-				<select name="field" class="border p-2 rounded bg-white pr-8">
-					<option value="company">Company</option>
-					<option value="role">Role</option>
-					<option value="status">Status</option>
-					<option value="type">Type</option>
-					<option value="model">Model</option>
-					<option value="location">Location</option>
-				</select>
-				<input
-					type="text"
-					name="query"
-					class="border p-2 rounded bg-white"
-					placeholder="Search..."
-				/>
-				<button
-					type="submit"
-					class="bg-blue-200 border px-4 py-2 rounded hover:bg-blue-300 transition">Search</button
-				>
-				<a
-					href="/applications"
-					class="bg-yellow-200 border px-4 py-2 rounded hover:bg-yellow-300 transition">Clear</a
-				>
-			</form>
-			<a
-				href="/application/new"
-				class="bg-blue-200 border px-4 py-2 rounded hover:bg-blue-300 transition">Add New</a
+	<div class="bg-foreground rounded-xl shadow-lg border border-body overflow-hidden p-6">
+		<form method="GET" class="flex items-center gap-4 mb-6">
+			<select
+				name="field"
+				class="border border-body p-2 rounded-lg bg-background text-body focus:ring-primary focus:border-primary pr-8"
 			>
-		</div>
+				<option value="company">Company</option>
+				<option value="role">Role</option>
+				<option value="status">Status</option>
+				<option value="type">Type</option>
+				<option value="model">Model</option>
+				<option value="location">Location</option>
+			</select>
+			<input
+				type="text"
+				name="query"
+				class="flex-1 p-2 border border-body rounded-lg bg-background text-body focus:ring-primary focus:border-primary"
+				placeholder="Search..."
+			/>
+			<button
+				type="submit"
+				class="font-medium bg-primary border text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+				>Search</button
+			>
+			<a
+				href="/applications"
+				class="font-medium bg-primary border text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+				>Clear</a
+			>
+		</form>
 
-		<div class="overflow-y-auto border">
-			<table class="min-w-full bg-white">
-				<thead>
+		<div class="overflow-x-auto">
+			<table class="min-w-full">
+				<thead class="bg-background border-b border-body">
 					<tr>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>COMPANY</th
-						>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>ROLE</th
-						>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>STATUS</th
-						>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>TYPE</th
-						>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>MODEL</th
-						>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>LOCATION</th
-						>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>APPLIED ON</th
-						>
-						<th
-							class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
-							>ACTIONS</th
-						>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">COMPANY</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">ROLE</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">STATUS</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">TYPE</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">MODEL</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">LOCATION</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">APPLIED ON</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">ACTIONS</th>
 					</tr>
 				</thead>
 				<tbody>
 					{#each data.applications as app}
-						<tr class="hover:bg-gray-50">
-							<td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900"
-								><a href="/applications/{app.id}" class="hover:underline">{app.company}</a></td
-							>
-							<td class="py-4 px-6 whitespace-nowrap text-sm">{app.role}</td>
-							<td class="py-4 px-6 whitespace-nowrap text-sm">{app.status}</td>
-							<td class="py-4 px-6 whitespace-nowrap text-sm">{app.type}</td>
-							<td class="py-4 px-6 whitespace-nowrap text-sm">{app.model}</td>
-							<td class="py-4 px-6 whitespace-nowrap text-sm">{app.location}</td>
-							<td class="py-4 px-6 whitespace-nowrap text-sm">{app.appliedAt.toDateString()}</td>
-							<td class="py-4 px-6 whitespace-nowrap text-sm">
+						<tr class="border-b border-body/50 hover:bg-background/50 transition-colors">
+							<td class="p-4 whitespace-nowrap font-medium text-heading">{app.company}</td>
+							<td class="p-4 whitespace-nowrap text-body">{app.role}</td>
+							<td class="p-4 whitespace-nowrap text-body">{app.status}</td>
+							<td class="p-4 whitespace-nowrap text-body">{app.type}</td>
+							<td class="p-4 whitespace-nowrap text-body">{app.model}</td>
+							<td class="p-4 whitespace-nowrap text-body">{app.location}</td>
+							<td class="p-4 whitespace-nowrap text-body">{app.appliedAt.toDateString()}</td>
+							<td class="p-4 whitespace-nowrap text-body">
 								<div class="flex gap-2">
-									<a href="/applications/{app.id}" class="hover:underline">
+									<a
+										href="/applications/{app.id}"
+										class="text-body hover:text-primary transition-colors"
+									>
 										<Eye size={20} />
 									</a>
-									<a href="/applications/update/{app.id}" class="hover:underline">
+									<a
+										href="/applications/update/{app.id}"
+										class="text-body hover:text-primary transition-colors"
+									>
 										<Pencil size={20} />
 									</a>
 								</div>
@@ -111,9 +90,7 @@
 						</tr>
 					{:else}
 						<tr>
-							<td colspan="8" class="text-center text-sm py-4 px-6 tracking-wider"
-								>no applications found</td
-							>
+							<td colspan="8" class="text-center p-8 text-body">No applications found.</td>
 						</tr>
 					{/each}
 				</tbody>

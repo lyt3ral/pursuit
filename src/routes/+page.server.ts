@@ -2,7 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import * as auth from '$lib/server/auth';
 import type { Actions, PageServerLoad } from './$types';
 import { db } from '$lib/server/db';
-import { eq, desc } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { application } from '$lib/server/db/schema';
 
 export const load: PageServerLoad = async ({ parent }) => {
@@ -13,9 +13,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 
 	const queryStart = performance.now();
 	const applications = await db.query.application.findMany({
-		where: eq(application.userId, user.id),
-		orderBy: [desc(application.createdAt)],
-		limit: 10
+		where: eq(application.userId, user.id)
 	});
 	const queryEnd = performance.now();
 
