@@ -2,50 +2,50 @@
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
 
-	export let form: ActionData;
+	let { form } = $props();
 </script>
 
-<div class="flex items-center justify-center min-h-screen bg-red-300 p-4">
-	<div class="w-full max-w-md p-8 space-y-6 bg-white border rounded-lg shadow-lg">
-		<h1 class="text-3xl font-bold font-serif text-center text-gray-900">Create Account</h1>
+<div class="flex items-center justify-center min-h-screen bg-background p-4">
+	<div class="w-full max-w-md p-8 space-y-6 bg-foreground border border-body rounded-lg shadow-lg">
+		<h1 class="text-3xl font-bold text-center text-heading">Create Account</h1>
 
 		<form method="POST" action="?/register" use:enhance class="space-y-6">
 			<div>
-				<label for="username" class="block mb-2 font-medium text-gray-700">Username</label>
+				<label for="username" class="block mb-2 font-medium text-body">Username</label>
 				<input
 					id="username"
 					name="username"
 					type="text"
 					required
-					class="w-full p-2 bg-gray-50 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+					class="w-full p-2 bg-background border border-body rounded focus:outline-none focus:ring-2 focus:ring-primary"
 				/>
 			</div>
 			<div>
-				<label for="password" class="block mb-2 font-medium text-gray-700">Password</label>
+				<label for="password" class="block mb-2 font-medium text-body">Password</label>
 				<input
 					id="password"
 					name="password"
 					type="password"
 					required
-					class="w-full p-2 bg-gray-50 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+					class="w-full p-2 bg-background border border-body rounded focus:outline-none focus:ring-2 focus:ring-primary"
 				/>
 			</div>
 
 			{#if form?.message}
-				<p class="text-sm text-red-600 text-center">{form.message}</p>
+				<p class="text-sm text-red-500 text-center">{form.message}</p>
 			{/if}
 
 			<button
 				type="submit"
-				class="w-full font-medium bg-blue-200 px-4 py-2 border rounded transition hover:bg-blue-300 cursor-pointer"
+				class="w-full font-medium bg-primary text-heading px-4 py-2 border border-body rounded transition hover:bg-opacity-80 cursor-pointer"
 			>
 				Create Account
 			</button>
 		</form>
 
-		<p class="text-sm text-center">
+		<p class="text-sm text-center text-body">
 			Already have an account?
-			<a href="/login" class="font-medium hover:underline">Sign in</a>
+			<a href="/login" class="font-medium hover:underline text-primary">Sign in</a>
 		</p>
 	</div>
 </div>
