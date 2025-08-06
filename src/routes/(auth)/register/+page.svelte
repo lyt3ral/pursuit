@@ -6,7 +6,9 @@
 </script>
 
 <div class="flex items-center justify-center min-h-screen bg-background p-4">
-	<div class="w-full max-w-md p-8 space-y-6 bg-foreground border border-body rounded-lg shadow-lg">
+	<div
+		class="w-full max-w-md p-8 space-y-6 bg-foreground border border-border rounded-lg shadow-lg"
+	>
 		<h1 class="text-3xl font-bold text-center text-heading">Create Account</h1>
 
 		<form method="POST" action="?/register" use:enhance class="space-y-6">
@@ -17,7 +19,7 @@
 					name="username"
 					type="text"
 					required
-					class="w-full p-2 bg-background border border-body rounded focus:outline-none focus:ring-2 focus:ring-primary"
+					class="w-full p-2 bg-background border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
 				/>
 			</div>
 			<div>
@@ -27,7 +29,7 @@
 					name="password"
 					type="password"
 					required
-					class="w-full p-2 bg-background border border-body rounded focus:outline-none focus:ring-2 focus:ring-primary"
+					class="w-full p-2 bg-background border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
 				/>
 			</div>
 
@@ -37,7 +39,7 @@
 
 			<button
 				type="submit"
-				class="w-full font-medium bg-primary text-heading px-4 py-2 border border-body rounded transition hover:bg-opacity-80 cursor-pointer"
+				class="w-full font-medium bg-primary hover:bg-primary-hover text-heading px-4 py-2 border border-border rounded transition hover:bg-opacity-80 cursor-pointer"
 			>
 				Create Account
 			</button>

@@ -1,8 +1,22 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { Eye, Pencil } from '@lucide/svelte';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
+	let searchQuery = data.searchQuery;
+	let searchField = data.searchField;
+
+	function updatePage(page: number) {
+		const url = new URL(window.location.origin + window.location.pathname);
+		url.search = data.searchParams ?? '';
+		url.searchParams.set('page', page.toString());
+		if (searchQuery) {
+			url.searchParams.set('query', searchQuery);
+			url.searchParams.set('field', searchField ?? '');
+		}
+		goto(url.toString());
+	}
 </script>
 
 <div class="space-y-8">
@@ -10,9 +24,9 @@
 		<h2 class="text-3xl font-bold text-heading">Your Applications</h2>
 		<a
 			href="/applications/new"
-			class="font-semibold border text-heading px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-opacity-80"
+			class="font-semibold text-heading px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-opacity-80"
 		>
-			Add Application
+			Add New Application
 		</a>
 	</div>
 
@@ -21,6 +35,7 @@
 			<select
 				name="field"
 				class="border border-body p-2 rounded-lg bg-background text-body focus:ring-primary focus:border-primary pr-8"
+				bind:value={searchField}
 			>
 				<option value="company">Company</option>
 				<option value="role">Role</option>
@@ -34,15 +49,16 @@
 				name="query"
 				class="flex-1 p-2 border border-body rounded-lg bg-background text-body focus:ring-primary focus:border-primary"
 				placeholder="Search..."
+				bind:value={searchQuery}
 			/>
 			<button
 				type="submit"
-				class="font-medium bg-primary border text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+				class="font-medium bg-primary text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
 				>Search</button
 			>
 			<a
 				href="/applications"
-				class="font-medium bg-primary border text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+				class="font-medium bg-primary text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
 				>Clear</a
 			>
 		</form>
@@ -96,5 +112,25 @@
 				</tbody>
 			</table>
 		</div>
+
+		{#if data.totalPages > 1}
+			<div class="flex justify-center items-center gap-4 mt-6">
+				<button
+					class="font-medium bg-primary hover:bg-primary-hover cursor-pointer text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+					on:click={() => updatePage(data.currentPage - 1)}
+					disabled={data.currentPage === 1}
+				>
+					Previous
+				</button>
+				<span class="text-body">Page {data.currentPage} of {data.totalPages}</span>
+				<button
+					class="font-medium bg-primary hover:bg-primary-hover cursor-pointer text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+					on:click={() => updatePage(data.currentPage + 1)}
+					disabled={data.currentPage === data.totalPages}
+				>
+					Next
+				</button>
+			</div>
+		{/if}
 	</div>
 </div>

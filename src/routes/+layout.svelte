@@ -12,8 +12,8 @@
 <div class="flex h-screen bg-background text-heading">
 	{#if showSidebar}
 		<!-- Sidebar -->
-		<aside class="w-48 flex-shrink-0 bg-foreground flex flex-col border-r border-body">
-			<div class="h-16 flex items-center px-6 border-b border-body">
+		<aside class="w-48 flex-shrink-0 bg-foreground flex flex-col border-r border-border">
+			<div class="h-16 flex items-center px-6 border-b border-border">
 				<h1 class="text-2xl font-bold text-heading">pursuit</h1>
 			</div>
 			<nav class="flex-1 px-2 py-6 space-y-2">
@@ -39,7 +39,7 @@
 					<span>Jobs</span>
 				</a>
 			</nav>
-			<div class="px-2 py-6 border-t border-body">
+			<div class="px-2 py-6 border-t border-border">
 				{#if data.user}
 					<div class="flex items-center gap-3 mb-4 px-4">
 						<User class="w-8 h-8 p-1.5 bg-background rounded-full" />
@@ -47,7 +47,7 @@
 					</div>
 					<form method="POST" action="?/logout" use:enhance>
 						<button
-							class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-lg text-heading hover:bg-primary/75 transition-colors"
+							class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-lg text-heading hover:bg-destructive transition-colors"
 						>
 							<LogOut class="w-5 h-5" />
 							<span>Logout</span>
