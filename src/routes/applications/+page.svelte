@@ -24,9 +24,9 @@
 		<h2 class="text-3xl font-bold text-heading">Your Applications</h2>
 		<a
 			href="/applications/new"
-			class="font-semibold text-heading px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-opacity-80"
+			class="font-semibold text-heading px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary-hover cursor-pointer"
 		>
-			Add New Application
+			Add Application
 		</a>
 	</div>
 
@@ -53,12 +53,12 @@
 			/>
 			<button
 				type="submit"
-				class="font-medium bg-primary text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+				class="font-medium bg-primary hover:bg-primary-hover cursor-pointer text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
 				>Search</button
 			>
 			<a
 				href="/applications"
-				class="font-medium bg-primary text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
+				class="font-medium bg-primary hover:bg-primary-hover cursor-pointer text-heading px-4 py-2 rounded-lg shadow-sm hover:bg-opacity-80 transition-all"
 				>Clear</a
 			>
 		</form>

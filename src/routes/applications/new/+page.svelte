@@ -111,7 +111,7 @@
 
 		<button
 			type="submit"
-			class="w-full font-semibold text-heading px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary-hover hover:bg-opacity-80"
+			class="w-full font-semibold text-heading px-6 py-3 cursor-pointer rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary-hover hover:bg-opacity-80"
 		>
 			Add Application
 		</button>
