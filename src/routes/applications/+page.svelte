@@ -30,11 +30,11 @@
 		</a>
 	</div>
 
-	<div class="bg-foreground rounded-xl shadow-lg border border-body overflow-hidden p-6">
+	<div class="bg-foreground rounded-xl shadow-lg border border-border overflow-hidden p-6">
 		<form method="GET" class="flex items-center gap-4 mb-6">
 			<select
 				name="field"
-				class="border border-body p-2 rounded-lg bg-background text-body focus:ring-primary focus:border-primary pr-8"
+				class="border border-border p-2 rounded-lg bg-background text-body focus:ring-primary focus:border-primary pr-8"
 				bind:value={searchField}
 			>
 				<option value="company">Company</option>
@@ -47,7 +47,7 @@
 			<input
 				type="text"
 				name="query"
-				class="flex-1 p-2 border border-body rounded-lg bg-background text-body focus:ring-primary focus:border-primary"
+				class="flex-1 p-2 border border-border rounded-lg bg-background text-body focus:ring-primary focus:border-primary"
 				placeholder="Search..."
 				bind:value={searchQuery}
 			/>
@@ -65,7 +65,7 @@
 
 		<div class="overflow-x-auto">
 			<table class="min-w-full">
-				<thead class="bg-background border-b border-body">
+				<thead class="bg-background border-b border-border">
 					<tr>
 						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">COMPANY</th>
 						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">ROLE</th>
@@ -79,7 +79,7 @@
 				</thead>
 				<tbody>
 					{#each data.applications as app}
-						<tr class="border-b border-body/50 hover:bg-background/50 transition-colors">
+						<tr class="border-b border-border/50 hover:bg-background/50 transition-colors">
 							<td class="p-4 whitespace-nowrap font-medium text-heading">{app.company}</td>
 							<td class="p-4 whitespace-nowrap text-body">{app.role}</td>
 							<td class="p-4 whitespace-nowrap text-body">{app.status}</td>
