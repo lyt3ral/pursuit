@@ -44,7 +44,9 @@ export const application = pgTable('job_application', {
 	location: text('location'),
 	appliedAt: timestamp('applied_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow(),
 	notes: text('notes'),
-	status: applicationStatusEnum('status').notNull()
+	status: applicationStatusEnum('status').notNull(),
+	createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow(),
+	updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow()
 });
 
 export type Session = typeof session.$inferSelect;

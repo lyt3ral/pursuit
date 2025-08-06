@@ -7,7 +7,11 @@
 
 <div class="p-8 bg-red-300 h-full min-h-screen">
 	<div class="flex justify-between items-center">
-		<h1 class="text-3xl font-semibold font-serif">pursuit</h1>
+		<div class="flex gap-4 items-center">
+			<h1 class="text-3xl font-semibold font-serif mr-6">pursuit</h1>
+			<a href="/applications" class="hover:underline">applications</a>
+			<a href="/jobs" class="hover:underline">jobs</a>
+		</div>
 		<div class="flex gap-4 items-center">
 			<p>
 				{data.user.username}
@@ -66,45 +70,69 @@
 	<div class="flex justify-between items-center mt-12">
 		<p class="text-lg font-serif">your recent applications</p>
 		<a
-			href="/application/new"
+			href="/applications/new"
 			class="bg-blue-200 border px-4 py-2 rounded hover:bg-blue-300 transition">Add New</a
 		>
 	</div>
 
-	<table class="min-w-full bg-white border mt-2">
-		<thead>
-			<tr class="bg-blue-200 border-b">
-				<th class="py-3 px-6 text-left text-xs font-medium tracking-wider">COMPANY</th>
-				<th class="py-3 px-6 text-left text-xs font-medium tracking-wider">ROLE</th>
-				<th class="py-3 px-6 text-left text-xs font-medium tracking-wider">STATUS</th>
-				<th class="py-3 px-6 text-left text-xs font-medium tracking-wider">TYPE</th>
-				<th class="py-3 px-6 text-left text-xs font-medium tracking-wider">MODEL</th>
-				<th class="py-3 px-6 text-left text-xs font-medium tracking-wider">LOCATION</th>
-				<th class="py-3 px-6 text-left text-xs font-medium tracking-wider">APPLIED ON</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each data.applications as app}
-				<tr class="hover:bg-gray-50 border-gray-200">
-					<td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900"
-						>{app.company}</td
-					>
-					<td class="py-4 px-6 whitespace-nowrap text-sm">{app.role}</td>
-					<td class="py-4 px-6 whitespace-nowrap text-sm">{app.status}</td>
-					<td class="py-4 px-6 whitespace-nowrap text-sm">{app.type}</td>
-					<td class="py-4 px-6 whitespace-nowrap text-sm">{app.model}</td>
-					<td class="py-4 px-6 whitespace-nowrap text-sm">{app.location}</td>
-					<td class="py-4 px-6 whitespace-nowrap text-sm">{app.appliedAt.toDateString()}</td>
-				</tr>
-			{:else}
+	<div class="overflow-y-auto max-h-64 mt-2 border">
+		<table class="min-w-full bg-white">
+			<thead>
 				<tr>
-					<td colspan="7" class="text-center text-sm py-4 px-6 tracking-wider"
-						>no applications found</td
+					<th
+						class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
+						>COMPANY</th
+					>
+					<th
+						class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
+						>ROLE</th
+					>
+					<th
+						class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
+						>STATUS</th
+					>
+					<th
+						class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
+						>TYPE</th
+					>
+					<th
+						class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
+						>MODEL</th
+					>
+					<th
+						class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
+						>LOCATION</th
+					>
+					<th
+						class="sticky top-0 bg-blue-200 py-3 px-6 text-left text-xs font-medium tracking-wider"
+						>APPLIED ON</th
 					>
 				</tr>
-			{/each}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{#each data.applications as app}
+					<tr class="hover:bg-gray-50">
+						<td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900"
+							>{app.company}</td
+						>
+						<td class="py-4 px-6 whitespace-nowrap text-sm">{app.role}</td>
+						<td class="py-4 px-6 whitespace-nowrap text-sm">{app.status}</td>
+						<td class="py-4 px-6 whitespace-nowrap text-sm">{app.type}</td>
+						<td class="py-4 px-6 whitespace-nowrap text-sm">{app.model}</td>
+						<td class="py-4 px-6 whitespace-nowrap text-sm">{app.location}</td>
+						<td class="py-4 px-6 whitespace-nowrap text-sm">{app.appliedAt.toDateString()}</td>
+					</tr>
+				{:else}
+					<tr>
+						<td colspan="7" class="text-center text-sm py-4 px-6 tracking-wider"
+							>no applications found</td
+						>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
+
 	<footer class="fixed inset-x-0 bottom-0 pb-6 bg-red-300 w-full items-center flex flex-col">
 		<div class="w-full border-t mb-2"></div>
 		<p>
