@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
+	import { Eye, Pencil, Plus } from '@lucide/svelte';
 	let { data } = $props();
 </script>
 
@@ -23,12 +23,12 @@
 	<section id="recent-applications">
 		<div class="flex justify-between items-center mb-6">
 			<h2 class="text-3xl font-bold text-heading">Recent Applications</h2>
-			<a
-				href="/applications/new"
-				class="font-semibold text-heading px-6 py-2 rounded-lg hover:bg-primary-hover transition-all bg-primary"
+			<div
+				class="font-semibold gap-1 text-heading px-4 py-2 flex items-center rounded-lg shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary-hover cursor-pointer"
 			>
-				Add Application
-			</a>
+				<Plus size={16} class="mt-0.5" />
+				<a href="/applications/new"> Add Application </a>
+			</div>
 		</div>
 		<div class="bg-foreground rounded-xl shadow-lg border border-border overflow-hidden">
 			<table class="min-w-full">
@@ -41,6 +41,7 @@
 						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">MODEL</th>
 						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">LOCATION</th>
 						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">APPLIED ON</th>
+						<th class="p-4 text-left text-sm font-semibold text-body tracking-wider">ACTIONS</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,10 +54,26 @@
 							<td class="p-4 whitespace-nowrap text-body">{app.model}</td>
 							<td class="p-4 whitespace-nowrap text-body capitalize">{app.location}</td>
 							<td class="p-4 whitespace-nowrap text-body">{app.appliedAt.toDateString()}</td>
+							<td class="p-4 whitespace-nowrap text-body">
+								<div class="flex gap-2">
+									<a
+										href="/applications/{app.id}"
+										class="text-body hover:text-primary transition-colors"
+									>
+										<Eye size={20} />
+									</a>
+									<a
+										href="/applications/update/{app.id}"
+										class="text-body hover:text-primary transition-colors"
+									>
+										<Pencil size={20} />
+									</a>
+								</div>
+							</td>
 						</tr>
 					{:else}
 						<tr>
-							<td colspan="7" class="text-center p-8 text-body">
+							<td colspan="8" class="text-center p-8 text-body">
 								You haven't added any applications yet.
 							</td>
 						</tr>
