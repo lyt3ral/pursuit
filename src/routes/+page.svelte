@@ -25,7 +25,7 @@
 			<h2 class="text-3xl font-bold text-heading">Recent Applications</h2>
 			<a
 				href="/applications/new"
-				class="font-semibold border text-heading px-6 py-3 rounded-lg shadow-md hover:bg-primary-hover transition-all bg-primary hover:bg-opacity-80"
+				class="font-semibold text-heading px-6 py-2 rounded-lg hover:bg-primary-hover transition-all bg-primary"
 			>
 				Add Application
 			</a>
