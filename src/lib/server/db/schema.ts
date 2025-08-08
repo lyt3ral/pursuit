@@ -1,4 +1,5 @@
 import { pgTable, serial, integer, text, timestamp, pgEnum } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
 export const user = pgTable('user', {
 	id: text('id').primaryKey(),
@@ -49,6 +50,62 @@ export const application = pgTable('job_application', {
 	updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow()
 });
 
+export const company = pgTable('company', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull().unique(),
+	website: text('website'),
+	linkedinUrl: text('linkedin_url'),
+	crunchbaseUrl: text('crunchbase_url')
+});
+
+export const job = pgTable('job', {
+	id: serial('id').primaryKey(),
+	role: text('role').notNull(),
+	companyId: integer('company_id')
+		.notNull()
+		.references(() => company.id),
+	url: text('listing_url').notNull().unique(),
+	model: modelEnum('work_model'),
+	type: typeEnum('type'),
+	location: text('location'),
+	description: text('description').notNull(),
+	skills: text('skills').notNull(),
+	postedOn: timestamp('posted_on', { withTimezone: true, mode: 'date' }),
+	validUntil: timestamp('valid_until', { withTimezone: true, mode: 'date' }),
+	updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow()
+});
+
 export type Session = typeof session.$inferSelect;
 
 export type User = typeof user.$inferSelect;
+
+// Relations
+export const userRelations = relations(user, ({ many }) => ({
+	sessions: many(session),
+	applications: many(application)
+}));
+
+export const sessionRelations = relations(session, ({ one }) => ({
+	user: one(user, {
+		fields: [session.userId],
+		references: [user.id]
+	})
+}));
+
+export const applicationRelations = relations(application, ({ one }) => ({
+	user: one(user, {
+		fields: [application.userId],
+		references: [user.id]
+	})
+}));
+
+export const companyRelations = relations(company, ({ many }) => ({
+	jobs: many(job)
+}));
+
+export const jobRelations = relations(job, ({ one }) => ({
+	company: one(company, {
+		fields: [job.companyId],
+		references: [company.id]
+	})
+}));

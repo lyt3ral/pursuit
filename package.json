@@ -14,7 +14,8 @@
 		"lint": "prettier --check . && eslint .",
 		"db:push": "drizzle-kit push",
 		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"db:seed": "bun src/lib/server/db/seed.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -41,6 +42,7 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
+		"@faker-js/faker": "^9.9.0",
 		"@lucide/svelte": "^0.534.0",
 		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",
