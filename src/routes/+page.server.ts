@@ -2,25 +2,30 @@ import { fail, redirect } from '@sveltejs/kit';
 import * as auth from '$lib/server/auth';
 import type { Actions, PageServerLoad } from './$types';
 import { db } from '$lib/server/db';
-import { eq } from 'drizzle-orm';
-import { application } from '$lib/server/db/schema';
+import { eq, desc } from 'drizzle-orm';
+import { application, job } from '$lib/server/db/schema';
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const start = performance.now();
-
 	const { user } = await parent();
 	if (!user) throw redirect(302, '/login');
 
-	const queryStart = performance.now();
-	const applications = await db.query.application.findMany({
+	// Kick off queries in parallel without awaiting so the page can stream & show skeletons
+	const applicationsPromise = db.query.application.findMany({
 		where: eq(application.userId, user.id)
 	});
-	const queryEnd = performance.now();
 
-	console.log(`DB query took ${queryEnd - queryStart} ms`);
-	console.log(`Total load function took ${performance.now() - start} ms`);
+	const jobsPromise = db.query.job.findMany({
+		orderBy: desc(job.updatedAt),
+		limit: 8,
+		with: { company: true }
+	});
 
-	return { user, applications };
+	// Return deferred promises so {#await} blocks in the page component render fallbacks first
+	return {
+		user,
+		applications: applicationsPromise,
+		jobs: jobsPromise
+	};
 };
 
 export const actions: Actions = {
