@@ -9,6 +9,8 @@
  */
 
 import { scrapeAllConfiguredJobs } from './scraper';
+import { fetchWorkdayJobDetails } from './get-details';
+import { analyzeJob } from './analyze-job';
 
 export default {
 	async fetch(request: Request): Promise<Response> {
@@ -24,22 +26,30 @@ export default {
 
 		try {
 			// Configuration for scraping - URLs are read from urls.ts file
-			const searchText = 'Software Engineer'; // Example search text
-			const countryId = 'c4f78be1a8f14da0ab49ce1162348a5e'; // Default India country ID
-			const todayOnly = true; // Set to true to only get jobs posted today
+			const searchText = 'Software Engineer';
+			const countryId = 'c4f78be1a8f14da0ab49ce1162348a5e';
+			const todayOnly = true;
 
 			const jobs = await scrapeAllConfiguredJobs(searchText, countryId, todayOnly);
-			console.log(`Scheduled scrape completed: found ${jobs.length} total jobs${todayOnly ? ' (today only)' : ''}`);
+			console.log(
+				`Scheduled scrape completed: found ${jobs.length} total jobs${todayOnly ? ' (today only)' : ''}`
+			);
 
 			for (const job of jobs) {
 				console.log(`Job Title: ${job.title}, Location: ${job.location}, Posted On: ${job.posted}`);
 				console.log(`Job URL: ${job.url}`);
+				const details = await fetchWorkdayJobDetails(job.url);
+				console.log(details);
+				const analysis = await analyzeJob(job.title, details.jobDescription || '', {
+					endpoint: `https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct-fast`,
+					apiKey: env.WORKERS_AI_KEY,
+					maxTokens: 256,
+					temperature: 0.0
+				});
+				console.log(analysis);
 			}
-
-			// Here you could store the results in KV, D1, or send notifications
-			// For now, we'll just log the job count
 		} catch (error) {
 			console.error('Error in scheduled job:', error);
 		}
-	},
+	}
 } satisfies ExportedHandler<Env>;

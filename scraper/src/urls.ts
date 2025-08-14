@@ -7,5 +7,6 @@ export const WORKDAY_URLS = [
 
 	'https://amgen.wd1.myworkdayjobs.com/careers',
 	'https://bpinternational.wd3.myworkdayjobs.com/bpCareers/',
+	'https://kaleris.wd501.myworkdayjobs.com/kaleris_careers/'
 	// Add more URLs here as needed
 ];
