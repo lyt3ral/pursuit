@@ -15,7 +15,10 @@
 		"db:push": "drizzle-kit push",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
-		"db:seed": "bun src/lib/server/db/seed.ts"
+		"db:seed": "bun src/lib/server/db/seed.ts",
+		"scraper:install": "cd scraper && bun install",
+		"scraper:dev": "cd scraper && bun run dev",
+		"scraper:deploy": "cd scraper && bun run deploy"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
