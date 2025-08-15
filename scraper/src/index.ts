@@ -28,9 +28,16 @@ export default {
 			// Configuration for scraping - URLs are read from urls.ts file
 			const searchText = 'Software Engineer';
 			const countryId = 'c4f78be1a8f14da0ab49ce1162348a5e';
+			const locationHierarchyId = '2fcb99c455831013ea52b82135ba3266';
 			const todayOnly = true;
 
-			const jobs = await scrapeAllConfiguredJobs(searchText, countryId, todayOnly);
+			const jobs = await scrapeAllConfiguredJobs(
+				searchText,
+				countryId,
+				todayOnly,
+				locationHierarchyId
+			);
+
 			console.log(
 				`Scheduled scrape completed: found ${jobs.length} total jobs${todayOnly ? ' (today only)' : ''}`
 			);
