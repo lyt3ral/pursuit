@@ -24,6 +24,9 @@ export default {
 	async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
 		console.log(`Scheduled job triggered at ${controller.cron}`);
 
+		// --- BENCHMARKING START ---
+		const startTime = performance.now();
+
 		try {
 			// Configuration for scraping - URLs are read from urls.ts file
 			const searchText = 'Software Engineer';
@@ -57,6 +60,13 @@ export default {
 			}
 		} catch (error) {
 			console.error('Error in scheduled job:', error);
+		} finally {
+			// --- BENCHMARKING END ---
+			const endTime = performance.now();
+			const durationInSeconds = (endTime - startTime) / 1000;
+			console.log(
+				`✅ Scheduled job finished. Total execution time: ${durationInSeconds.toFixed(2)} seconds.`
+			);
 		}
 	}
 } satisfies ExportedHandler<Env>;

@@ -14,5 +14,31 @@ export const WORKDAY_URLS = [
 	'https://ntrs.wd1.myworkdayjobs.com/en-US/northerntrust',
 	'https://corelogic.wd5.myworkdayjobs.com/Global',
 	'https://fortrea.wd1.myworkdayjobs.com/Fortrea',
-	'https://medtronic.wd1.myworkdayjobs.com/MedtronicCareers'
+	'https://medtronic.wd1.myworkdayjobs.com/MedtronicCareers',
+	// New URLs from the provided list
+	'https://spgi.wd5.myworkdayjobs.com/SPGI_Careers',
+	'https://ghr.wd1.myworkdayjobs.com/lateral-ba_continuum',
+	'https://barclays.wd3.myworkdayjobs.com/External_Career_Site_Barclays',
+	'https://boeing.wd1.myworkdayjobs.com/external_subsidiary',
+	'https://boeing.wd1.myworkdayjobs.com/EXTERNAL_CAREERS',
+	'https://alegeus.wd1.myworkdayjobs.com/Alegeus_External_Careers',
+	'https://qualys.wd5.myworkdayjobs.com/Careers',
+	'https://elevancehealth.wd1.myworkdayjobs.com/carelonglobal_in',
+	'https://rbs.wd3.myworkdayjobs.com/RBS',
+	'https://cohesity.wd5.myworkdayjobs.com/Cohesity_Careers',
+	'https://simcorp.wd3.myworkdayjobs.com/SimCorp_Private',
+	'https://lseg.wd3.myworkdayjobs.com/Careers',
+	'https://wk.wd3.myworkdayjobs.com/External',
+	'https://chevron.wd5.myworkdayjobs.com/ExternalCareerSite_Private',
+	'https://lowes.wd5.myworkdayjobs.com/LWS_External_CS',
+	'https://ciena.wd5.myworkdayjobs.com/Careers',
+	'https://wd1.myworkdaysite.com/recruiting/fmr/FidelityCareers',
+	'https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs'
+
+	// Below are urls that have city filters and no country filters
+	// 'https://relx.wd3.myworkdayjobs.com/RiskSolutions',
+	// 'https://cubic.wd1.myworkdayjobs.com/cubic_global_careers',
+	// 'https://tbc.wd12.myworkdayjobs.com/LyricCareers',
+	// 'https://mastercard.wd1.myworkdayjobs.com/CorporateCareers',
+	// 'https://wd1.myworkdaysite.com/recruiting/paypal/jobs',
 ];
