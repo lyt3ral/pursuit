@@ -33,7 +33,8 @@ export const WORKDAY_URLS = [
 	'https://lowes.wd5.myworkdayjobs.com/LWS_External_CS',
 	'https://ciena.wd5.myworkdayjobs.com/Careers',
 	'https://wd1.myworkdaysite.com/recruiting/fmr/FidelityCareers',
-	'https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs'
+	'https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs',
+	'https://att.wd1.myworkdayjobs.com/ATTGeneral'
 
 	// Below are urls that have city filters and no country filters
 	// 'https://relx.wd3.myworkdayjobs.com/RiskSolutions',
