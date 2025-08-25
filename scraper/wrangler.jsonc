@@ -8,5 +8,25 @@
 	},
 	"triggers": {
 		"crons": ["0 */12 * * *"]
+	},
+	"queues": {
+		"producers": [
+			{
+				"queue": "url-queue",
+				"binding": "URL_QUEUE"
+			},
+			{
+				"queue": "job-queue",
+				"binding": "JOB_QUEUE"
+			}
+		],
+		"consumers": [
+			{
+				"queue": "url-queue"
+			},
+			{
+				"queue": "job-queue"
+			}
+		]
 	}
 }

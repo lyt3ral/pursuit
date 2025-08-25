@@ -1,10 +1,10 @@
 export const WORKDAY_URLS = [
+	'https://att.wd1.myworkdayjobs.com/ATTGeneral',
 	'https://autodesk.wd1.myworkdayjobs.com/Ext',
 	'https://amadeus.wd3.myworkdayjobs.com/jobs/',
 	'https://amgen.wd1.myworkdayjobs.com/careers',
 	'https://bpinternational.wd3.myworkdayjobs.com/bpCareers/',
 	'https://kaleris.wd501.myworkdayjobs.com/kaleris_careers/',
-	'https://analogdevices.wd1.myworkdayjobs.com/External',
 	'https://adobe.wd5.myworkdayjobs.com/external_experienced',
 	'https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite',
 	'https://motorolasolutions.wd5.myworkdayjobs.com/Careers',
@@ -15,10 +15,8 @@ export const WORKDAY_URLS = [
 	'https://corelogic.wd5.myworkdayjobs.com/Global',
 	'https://fortrea.wd1.myworkdayjobs.com/Fortrea',
 	'https://medtronic.wd1.myworkdayjobs.com/MedtronicCareers',
-	// New URLs from the provided list
 	'https://spgi.wd5.myworkdayjobs.com/SPGI_Careers',
 	'https://ghr.wd1.myworkdayjobs.com/lateral-ba_continuum',
-	'https://barclays.wd3.myworkdayjobs.com/External_Career_Site_Barclays',
 	'https://boeing.wd1.myworkdayjobs.com/external_subsidiary',
 	'https://boeing.wd1.myworkdayjobs.com/EXTERNAL_CAREERS',
 	'https://alegeus.wd1.myworkdayjobs.com/Alegeus_External_Careers',
@@ -33,8 +31,7 @@ export const WORKDAY_URLS = [
 	'https://lowes.wd5.myworkdayjobs.com/LWS_External_CS',
 	'https://ciena.wd5.myworkdayjobs.com/Careers',
 	'https://wd1.myworkdaysite.com/recruiting/fmr/FidelityCareers',
-	'https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs',
-	'https://att.wd1.myworkdayjobs.com/ATTGeneral'
+	'https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs'
 
 	// Below are urls that have city filters and no country filters
 	// 'https://relx.wd3.myworkdayjobs.com/RiskSolutions',
