@@ -26,13 +26,15 @@ Return strictly valid JSON (no commentary, no markdown, no extra properties) wit
 
 {
   "isFresher": <true|false>,              // true when the role is explicitly entry-level / fresher / 0-2 yrs
+  "isCSRole": <true|false>, // true if the role is for a computer science graduate
   "techSkills": "<CSV of technical skills, First-letter-capitalized each item>", 
   "qualifications": "<brief single-line summary of minimum qualifications>"
 }
 
 Rules:
 - Decide "isFresher" using explicit cues (e.g., "Fresher", "Entry level", "0-2 years", "Graduate", "0-1 years") OR "Junior"/"Trainee"/"Intern".
-- If the JD contains phrases like in final year, internship, 0-2 years, entry level, fresher, recent graduate, no experience, foundational knowledge, or willingness to learn, treat it as a fresher/entry-level role (i.e., isFresher: true). 
+- If the JD contains phrases like in final year, internship, 0-2 years, entry level, fresher, recent graduate, no experience, foundational knowledge, or willingness to learn, treat it as a fresher/entry-level role (i.e., isFresher: true).
+- Decide "isCSRole" based on the title and description. If the role is for a software engineer, developer, programmer, or any other role that a computer science graduate would typically apply for, set this to true.
 - Only mark false when the JD explicitly requires several years of experience (e.g., 3+ years, 5 years, senior, lead).
 - techSkills: list ONLY technical skills/technologies explicitly required in the JD (no soft skills). Provide them as a comma-separated string. Capitalize each item: e.g., "Python, Docker, SQL".
 - qualifications: short single-line summary of minimum required education/degree/certifications and years of experience if stated.
@@ -51,6 +53,7 @@ export async function analyzeJob(
 	opts: AnalyzeOpts
 ): Promise<{
 	isFresher: boolean | null;
+	isCSRole: boolean | null;
 	techSkills: string | null;
 	qualifications: string | null;
 	raw: string;
@@ -90,6 +93,7 @@ export async function analyzeJob(
 		const txt = await resp.text();
 		return {
 			isFresher: null,
+			isCSRole: null,
 			techSkills: null,
 			qualifications: null,
 			raw: txt,
@@ -191,6 +195,7 @@ export async function analyzeJob(
 	if (!parsedJson) {
 		return {
 			isFresher: null,
+			isCSRole: null,
 			techSkills: null,
 			qualifications: null,
 			raw,
@@ -205,12 +210,19 @@ export async function analyzeJob(
 	else if (rawIsFresher === false || rawIsFresher === 'false') outIsFresher = false;
 	else outIsFresher = null;
 
+	const rawIsCSRole = parsedJson.isCSRole;
+	let outIsCSRole: boolean | null = null;
+	if (rawIsCSRole === true || rawIsCSRole === 'true') outIsCSRole = true;
+	else if (rawIsCSRole === false || rawIsCSRole === 'false') outIsCSRole = false;
+	else outIsCSRole = null;
+
 	const outTech = typeof parsedJson.techSkills === 'string' ? parsedJson.techSkills.trim() : null;
 	const outQual =
 		typeof parsedJson.qualifications === 'string' ? parsedJson.qualifications.trim() : null;
 
 	return {
 		isFresher: outIsFresher,
+		isCSRole: outIsCSRole,
 		techSkills: outTech,
 		qualifications: outQual,
 		raw
